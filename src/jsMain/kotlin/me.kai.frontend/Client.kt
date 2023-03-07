@@ -41,7 +41,7 @@ suspend fun renderMessages() {
 
 }
 
-var userID = Random.nextULong()
+var userID = Random.nextInt()
 
 suspend fun main() = scope.launch {
     setupUpdates {
@@ -60,7 +60,7 @@ suspend fun main() = scope.launch {
                 scope.launch {
                     sendMessage(Message(
                         (document.getElementById("msginput") as HTMLInputElement).value,
-                        Clock.System.now(), userID)).apply {
+                        Clock.System.now(), userID.toULong())).apply {
                         if (!this) {
                             console.log("failed to send message")
                         }
@@ -74,6 +74,4 @@ suspend fun main() = scope.launch {
             id = "messages"
         }
     }
-
-    renderMessages()
 }

@@ -30,6 +30,7 @@ fun Application.configureSockets() {
 
                             "register" -> {
                                 WebsocketHandler.addClient(this)
+                                outgoing.send(Frame.Text("update"))
                             }
 
                             "close" -> {
