@@ -101,6 +101,7 @@ tasks.getByName<Jar>("jvmJar") {
         "jsBrowserDevelopmentWebpack"
     }
     val webpackTask = tasks.getByName<org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpack>(taskName)
+    duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.EXCLUDE
     dependsOn(webpackTask) // make sure JS gets compiled first
     from(File(webpackTask.destinationDirectory, webpackTask.outputFileName)) // bring output file along into the JAR
 }

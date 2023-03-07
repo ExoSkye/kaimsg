@@ -1,4 +1,4 @@
-package protokai
+package me.kai.application
 
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
