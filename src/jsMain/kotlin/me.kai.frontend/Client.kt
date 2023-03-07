@@ -74,4 +74,6 @@ suspend fun main() = scope.launch {
             id = "messages"
         }
     }
+
+    renderMessages()
 }
