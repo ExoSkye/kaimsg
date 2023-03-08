@@ -23,7 +23,6 @@ val wsClient = HttpClient {
 
 private val scope = MainScope()
 
-@OptIn(DelicateCoroutinesApi::class)
 suspend fun setupUpdates(block: suspend () -> Unit) {
     scope.launch {
         wsClient.webSocket("/ws") {

@@ -80,6 +80,7 @@ kotlin {
                 implementation("io.ktor:ktor-client-websockets:$ktor_version")
                 implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
                 implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
+                implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.10.6-pre.509")
                 implementation("org.jetbrains.kotlinx:kotlinx-html-js:0.8.0")
             }
         }

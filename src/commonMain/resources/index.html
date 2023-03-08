@@ -5,7 +5,27 @@
     <title>KaiMsg</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: monospace;
+            background-color: black;
+            color: #F5F5F5;
+        }
+
+        .messages {
+            display: flex;
+            position: absolute;
+            top: 0;
+            bottom: 10%;
+            left: 0;
+            right: 0;
+            flex-direction: column-reverse;
+        }
+
+        .msg-input {
+            position: absolute;
+            top: 90%;
+            bottom: 0;
+            left: 0;
+            right: 0;
         }
     </style>
 </head>

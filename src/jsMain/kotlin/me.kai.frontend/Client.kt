@@ -12,12 +12,12 @@ import me.kai.common.Message
 import org.w3c.dom.HTMLDivElement
 import org.w3c.dom.HTMLInputElement
 import kotlin.random.Random
-import kotlin.random.nextULong
+import kotlin.random.nextUInt
 
 private val scope = MainScope()
 
 suspend fun renderMessages() {
-    val messages = getMessages(10)
+    val messages = getMessages(40)
     val messagesNode = (document.getElementById("messages") as HTMLDivElement)
 
     messagesNode.clear()
@@ -26,13 +26,11 @@ suspend fun renderMessages() {
         for (message in messages) {
             div {
                 classes = setOf("message")
-                p {
-                    classes = setOf("message-author")
-                    +message.userID.toString()
-                }
 
-                p {
+                div {
                     classes = setOf("message-content")
+                    +message.userID.toString()
+                    +": "
                     +message.content
                 }
             }
@@ -41,7 +39,7 @@ suspend fun renderMessages() {
 
 }
 
-var userID = Random.nextInt()
+var userID = Random.nextUInt()
 
 suspend fun main() = scope.launch {
     setupUpdates {
@@ -49,29 +47,39 @@ suspend fun main() = scope.launch {
     }
 
     document.body!!.append.div {
-        input {
-            type = InputType.text
-            value = "Message"
-            id = "msginput"
-        }
+        classes = setOf("msg-root")
 
-        button {
-            onClickFunction = {
-                scope.launch {
-                    sendMessage(Message(
-                        (document.getElementById("msginput") as HTMLInputElement).value,
-                        Clock.System.now(), userID.toULong())).apply {
-                        if (!this) {
-                            console.log("failed to send message")
-                        }
-                    }
-                }
-            }
-            +"Submit"
+        div {
+            classes = setOf("messages")
+            id = "messages"
         }
 
         div {
-            id = "messages"
+            classes = setOf("msg-input")
+
+            input {
+                type = InputType.text
+                placeholder = "Message"
+                id = "msginput"
+            }
+
+            button {
+                onClickFunction = {
+                    scope.launch {
+                        sendMessage(
+                            Message(
+                                (document.getElementById("msginput") as HTMLInputElement).value,
+                                Clock.System.now(), userID.toULong()
+                            )
+                        ).apply {
+                            if (!this) {
+                                console.log("failed to send message")
+                            }
+                        }
+                    }
+                }
+                +"Submit"
+            }
         }
     }
 }
